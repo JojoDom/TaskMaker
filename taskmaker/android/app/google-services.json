@@ -12,7 +12,20 @@
           "package_name": "com.example.taskmaker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "656868007744-v9q25v757305dgmcqbrcoc8gpm8jb9uk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taskmaker",
+            "certificate_hash": "12dc5b6c4a107ba60f6ce9a01f0e7796defe0f2a"
+          }
+        },
+        {
+          "client_id": "656868007744-a7tfdmni4pl5an2o6dnog4ljp7saba3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDjHBxTt2cuZkxdN8tFGpICNkmKuWWnZ0w"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656868007744-a7tfdmni4pl5an2o6dnog4ljp7saba3q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "656868007744-jl30vifmnuns1rtdvf8trqpk1op6t82f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.taskmaker"
+              }
+            }
+          ]
         }
       }
     }
