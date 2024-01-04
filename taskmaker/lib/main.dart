@@ -13,6 +13,7 @@ import 'package:auth_state_manager/auth_state_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await AuthStateManager.initializeAuthState();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
