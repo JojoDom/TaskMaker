@@ -51,6 +51,9 @@ dependencies:
   pull_to_refresh: ^2.0.0
   iconsax: ^0.0.8
   flutter_launcher_icons: ^0.13.1
+  flutter_local_notifications: ^16.3.0
+  logger: ^2.0.2+1
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:
