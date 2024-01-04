@@ -4,24 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
+import 'package:taskmaker/screens/dashboard/dashboard.dart';
+import 'package:taskmaker/screens/login_page/login_page.dart';
+import 'package:taskmaker/themes/themes.dart';
 import 'package:taskmaker/widgets/show_notification.dart';
 import 'firebase_options.dart';
+import 'package:auth_state_manager/auth_state_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
   NotificationSettings settings = await messaging.requestPermission(
-  alert: true,
-  announcement: false,
-  badge: true,
-  carPlay: false,
-  criticalAlert: false,
-  provisional: false,
-  sound: true,
-);
-print('User granted permission: ${settings.authorizationStatus}');
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.instance.onTokenRefresh.listen((messaging) {
     Logger().i('REFRESH ' + messaging);
@@ -33,23 +37,24 @@ print('User granted permission: ${settings.authorizationStatus}');
   );
 
   // Lisitnening to the background messages
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print("Handling a background message: ${message.messageId}");
-}
+  Future<void> _firebaseMessagingBackgroundHandler(
+      RemoteMessage message) async {
+    await Firebase.initializeApp();
+    print("Handling a background message: ${message.messageId}");
+  }
 
-FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 // Listneing to the foreground messages
-  
-FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');
-      showNotification(
-          title: notification?.title,
-          body: notification?.body,
-          image: message.data["image"],
-          route: message.data["screen"]);    
+    showNotification(
+        title: notification?.title,
+        body: notification?.body,
+        image: message.data["image"],
+        route: message.data["screen"]);
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
     }
@@ -64,24 +69,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'DoMeNow',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
+      theme: Themes.lightTheme,
+      darkTheme: Themes.darkTheme,
+      home: const Home(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const AuthStateListener(
+      authenticated: DashBoard(),
+      unAuthenticated: LoginPage(),
+    );
   }
 }
