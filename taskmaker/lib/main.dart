@@ -44,7 +44,7 @@ Future<void> main() async {
     print("Handling a background message: ${message.messageId}");
   }
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+ // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 // Listneing to the foreground messages
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
