@@ -44,7 +44,7 @@ Future<void> main() async {
     print("Handling a background message: ${message.messageId}");
   }
 
- // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 // Listneing to the foreground messages
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -87,9 +87,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return const AuthStateListener(
-      authenticated: DashBoard(),
-      unAuthenticated: LoginPage(),
-    );
+    return const LoginPage();
   }
 }
