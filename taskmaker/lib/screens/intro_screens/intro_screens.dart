@@ -34,7 +34,6 @@ class _IntroScreensState extends State<IntroScreens> {
     }
     return list;
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
