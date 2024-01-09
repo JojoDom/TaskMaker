@@ -11,8 +11,9 @@ class IntroScreens extends StatefulWidget {
 
 class _IntroScreensState extends State<IntroScreens> {
   final int _currentPage = 0;
-  
-   Widget _indicator(bool isActive) {
+  final pageController = PageController();
+
+  Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 100),
       curve: Curves.easeInToLinear,
@@ -25,6 +26,7 @@ class _IntroScreensState extends State<IntroScreens> {
       ),
     );
   }
+
   List<Widget> _buildPageIndicatorStatic() {
     List<Widget> list = [];
     for (int i = 0; i < intro.length; i++) {
@@ -57,7 +59,7 @@ class _IntroScreensState extends State<IntroScreens> {
                         Text(intro[index].content),
                         Row(
                           children: [
-                           const Text('Skip'),
+                            const Text('Skip'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: _buildPageIndicatorStatic(),

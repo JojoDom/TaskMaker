@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 import 'package:taskmaker/screens/dashboard/dashboard.dart';
+import 'package:taskmaker/screens/intro_screens/intro_screens.dart';
 import 'package:taskmaker/screens/login_page/login_page.dart';
 import 'package:taskmaker/themes/themes.dart';
 import 'package:taskmaker/widgets/show_notification.dart';
@@ -85,7 +86,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const AuthStateListener(
-      authenticated: DashBoard(),
+      authenticated: IntroScreens(),
        unAuthenticated: LoginPage());
   }
 }
