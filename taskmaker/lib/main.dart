@@ -13,7 +13,7 @@ import 'package:auth_state_manager/auth_state_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AuthStateManager.initializeAuthState();
+ 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
@@ -60,6 +60,7 @@ Future<void> main() async {
       print('Message also contained a notification: ${message.notification}');
     }
   });
+   await AuthStateManager.initializeAuthState();
   runApp(const MyApp());
 }
 
@@ -77,16 +78,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatefulWidget {
+
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
   Widget build(BuildContext context) {
-    return const LoginPage();
+    return const AuthStateListener(
+      authenticated: DashBoard(),
+       unAuthenticated: LoginPage());
   }
 }

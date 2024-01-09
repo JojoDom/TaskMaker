@@ -15,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +61,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 CustomButton(
                     onTap: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
                       try {
                         final user = await LoginController.loginWithGoogle();
                         if (user != null) {
+                          setState(() {
+                            isLoading = true;
+                          });
                         } else {
                           CherryToast.error(
                               title: const Text('Failed to authenticate user'));
@@ -77,8 +85,8 @@ class _LoginPageState extends State<LoginPage> {
                     image: SizedBox(
                         height: 30,
                         child: Image.asset('assets/images/google.png')),
-                    text: 'Google SignIn',
-                    isBusy: false)
+                    text: 'Google Sign In',
+                    isBusy: isLoading)
               ],
             ),
           ))

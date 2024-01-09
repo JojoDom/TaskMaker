@@ -2,11 +2,10 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:auth_state_manager/auth_state_manager.dart';
+import 'package:taskmaker/screens/dashboard/dashboard.dart';
 import 'package:taskmaker/screens/login_page/login_page.dart';
 
-
-
-class LoginController{
+class LoginController {
   static User? user = FirebaseAuth.instance.currentUser;
   static Future<User?> loginWithGoogle() async {
     final googleAccount = await GoogleSignIn().signIn();
@@ -19,11 +18,13 @@ class LoginController{
       final isSuccesful = await AuthStateManager.instance
           .setToken(googleAuth?.accessToken ?? '');
       if (isSuccesful) {
-        // AuthStateManager.instance.login();
+        AuthStateManager.instance.login();
+        Get.offAll(const DashBoard());
       }
     }
     return userCredential.user;
   }
+
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
